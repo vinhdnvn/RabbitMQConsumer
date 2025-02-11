@@ -1,16 +1,16 @@
-import { Injectable } from '@nestjs/common';
-import { EventPattern } from '@nestjs/microservices';
+import { Controller, Injectable } from '@nestjs/common';
+import { EventPattern, MessagePattern } from '@nestjs/microservices';
 import { TransactionService } from 'src/transactions/transaction.service';
 
-@Injectable()
-export class TransactionConsumer {
+@Controller()
+export class TransactionController {
   constructor(private readonly transactionService: TransactionService) {}
 
-  @EventPattern('money_queue')// ✅ Đảm bảo đúng queue
+  @MessagePattern('money_queue')
   async processTransaction(data: any) {
     console.log('📥 Received transaction:', data);
 
     // Gọi service xử lý giao dịch
-    await this.transactionService.processTransaction(data);
+    // await this.transactionService.processTransaction(data);
   }
 }

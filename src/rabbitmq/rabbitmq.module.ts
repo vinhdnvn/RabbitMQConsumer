@@ -1,10 +1,11 @@
 import { Module } from '@nestjs/common';
-import { TransactionConsumer } from './transaction.consumer';
+import { TransactionController } from './transaction.controller';
 import { TransactionService } from 'src/transactions/transaction.service';
 
 
 @Module({
-  providers: [TransactionConsumer, TransactionService],
-  exports: [TransactionConsumer, TransactionService],
+  controllers: [TransactionController],
+  providers: [ TransactionService],
+  exports: [TransactionService],
 })
 export class RabbitMQModule {}
